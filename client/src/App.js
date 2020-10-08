@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
 import { Grid } from '@material-ui/core';
 import SearchBar from './components/SearchBar';
 import PaginatedTable from './components/PaginatedTable';
@@ -26,18 +25,15 @@ const App = () => {
 
   const handleInputChange = (e) => {
     const { value } = e.target;
-    // setSearchCountry(value);
+    setSearchUser(value);
   };
 
-  const handleKeyPress = (e) => {
-    const { value } = e.target;
-    if (e.keyCode === 13) {
-      console.log('name:', value);
-      handleSearch();
-    }
+  const handleSearchUser = (query) => {
+    const filteredUsers = users.filter((user) => {
+      return user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+    });
+    return filteredUsers;
   };
-
-  const handleSearch = () => {};
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -53,15 +49,12 @@ const App = () => {
 
   return (
     <div>
-      <SearchBar
-        handleInputChange={handleInputChange}
-        handleKeyPress={handleKeyPress}
-      />
+      <SearchBar handleInputChange={handleInputChange} />
       <Grid container justify='center'>
         <Grid item xs={10} style={{ margin: '30px' }}>
           <PaginatedTable
             loading={loading}
-            users={users}
+            users={handleSearchUser(searchUser)}
             handleChangePage={handleChangePage}
             handleChangeRowsPerPage={handleChangeRowsPerPage}
             page={page}

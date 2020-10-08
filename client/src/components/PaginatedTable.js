@@ -37,9 +37,15 @@ export default function PaginatedTable({
       <Table className={classes.table} aria-label='custom pagination table'>
         <TableHead>
           <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Phone Number</TableCell>
-            <TableCell>Email</TableCell>
+            <TableCell>
+              <strong>Name</strong>
+            </TableCell>
+            <TableCell>
+              <strong>Phone Number</strong>
+            </TableCell>
+            <TableCell>
+              <strong>Email</strong>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableContent

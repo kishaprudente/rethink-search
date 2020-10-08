@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SearchBar = ({ handleInputChange, handleKeyPress }) => {
+const SearchBar = ({ handleInputChange }) => {
   const classes = useStyles();
 
   return (
@@ -65,7 +65,6 @@ const SearchBar = ({ handleInputChange, handleKeyPress }) => {
         <InputBase
           placeholder='Search User...'
           onChange={(e) => handleInputChange(e)}
-          onKeyDown={(e) => handleKeyPress(e)}
           classes={{
             root: classes.inputRoot,
             input: classes.inputInput,
