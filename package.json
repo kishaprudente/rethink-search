@@ -8,7 +8,8 @@
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
-    "install": "cd client && npm install"
+    "install": "cd client && npm install",
+    "seed": "node seed.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,9 @@
   "dependencies": {
     "axios": "^0.20.0",
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "faker": "^5.1.0",
+    "mongoose": "^5.10.8"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",
