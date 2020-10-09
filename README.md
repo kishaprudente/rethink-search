@@ -9,6 +9,10 @@
 
 ### Q # 2
 
+### Usage:
+- use 'Search' tab
+- search by name
+
 #### Packages Used:
 
 - material ui
@@ -16,6 +20,10 @@
 - faker
 
 ### Q # 3
+
+### Usage:
+- use 'Short Url' tab
+- place long url on input and click 'shorten'
 
 #### Packages Used
 
