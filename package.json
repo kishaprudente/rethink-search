@@ -23,10 +23,13 @@
   "homepage": "https://github.com/kishaprudente/rethink-search#readme",
   "dependencies": {
     "axios": "^0.20.0",
+    "config": "^3.3.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "faker": "^5.1.0",
-    "mongoose": "^5.10.8"
+    "mongoose": "^5.10.8",
+    "shortid": "^2.2.15",
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",

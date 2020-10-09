@@ -5,7 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
   nav: {
-    backgroundColor: '#136D9D',
+    backgroundColor: '#ab9b95',
     justifyContent: 'center',
     padding: '10px',
     display: 'flex',

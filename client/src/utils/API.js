@@ -5,7 +5,11 @@ export default {
     return axios.get(`/api/users?page=${page}&limit=${limit}`);
   },
 
-  getUser: (name) => {
-    return axios.get(`/api/user/:${name}`);
+  getUrls: () => {
+    return axios.get('/api/shortUrl');
+  },
+
+  createShortUrl: (longUrl) => {
+    return axios.post('/api/shortUrl', longUrl);
   },
 };
