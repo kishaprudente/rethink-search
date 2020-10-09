@@ -87,6 +87,7 @@ export default function ShortURL() {
               <TableRow>
                 <TableCell className={classes.text}>Original URL</TableCell>
                 <TableCell className={classes.text}>Short URL</TableCell>
+                <TableCell className={classes.text}>Click Count</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -98,6 +99,7 @@ export default function ShortURL() {
                   <TableCell>
                     <Link href={url.short}>{url.short}</Link>
                   </TableCell>
+                  <TableCell>{url.counter}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

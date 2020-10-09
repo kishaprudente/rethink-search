@@ -4,6 +4,13 @@ import SearchBar from '../components/SearchBar';
 import PaginatedTable from '../components/PaginatedTable';
 import API from '../utils/API';
 
+// Q # 2
+// Assumptions:
+// - over a million data coming in from api
+// - paginate the data with mongodb pagination and return only data with page and limit requested from the query.
+// - given the data is loaded in the table, user can search table with each character input in the search.
+// - to make sure characters match data with input from the search, make data lower case.
+
 const App = () => {
   const [searchUser, setSearchUser] = useState('');
   const [loading, setLoading] = useState(false);

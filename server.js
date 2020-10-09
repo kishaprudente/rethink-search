@@ -25,11 +25,33 @@ app.use('/api', userRoute);
 app.use('/api', shortUrlRoute);
 
 app.get(`/:urlCode`, async (req, res) => {
-  const { urlCode } = req.params;
-  const code = await Url.findOne({ urlCode: urlCode });
-  if (code == null) return res.sendStatus(404);
-  code.save();
-  res.redirect(code.long);
+  try {
+    const { urlCode } = req.params;
+    const url = await Url.findOne({ urlCode: urlCode });
+    if (url) {
+      let clickCount = url.counter;
+      if (clickCount >= config.allowedClick) {
+        return res
+          .status(400)
+          .json(
+            'The click count for shortcode ' +
+              shortUrlCode +
+              ' has passed the limit of ' +
+              config.allowedClick
+          );
+      } else {
+        clickCount++;
+        await url.update({ counter: clickCount });
+        url.save();
+        return res.redirect(url.long);
+      }
+    } else {
+      return res.status(400).json("The short url doesn't exists.");
+    }
+  } catch (err) {
+    // console.error('Error while retrieving long url for urlcode ' + urlCode);
+    return res.status(500).json('There is some internal error.');
+  }
 });
 
 app.listen(PORT, () => {

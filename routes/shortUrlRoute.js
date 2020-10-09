@@ -6,6 +6,17 @@ const Url = require('../models/Url');
 
 var shortUrlRoute = express.Router();
 
+// Q # 3
+// #### Assumptions:
+// - length of unique code = 7 and use base62 output, we can generate 3.5 trillion possible combinations of unique code.
+// - using npm package shortid, it can generate non-sequential ids.
+// - for scalability of the app, I use mongodb for faster write and read of data.
+// - to avoid collision with the sever, ideally we would use a distributed systems manager (e.g. ZooKeeper)
+// - but for this solution I am only using a click counter and limiting the user's click to the short url
+// - to avoid failure, we should run multiple instances of ZooKeeper
+// - to scale, we can put data in a cache to process redirects quickly if a single link will get a heavy load of requests
+// - we could also use a load balancer to distribute requests among servers.
+
 shortUrlRoute.post('/shortUrl', async (req, res) => {
   const { long } = req.body;
   const baseUrl = config.get('baseUrl');
@@ -15,7 +26,7 @@ shortUrlRoute.post('/shortUrl', async (req, res) => {
   }
 
   // generate unique code for url
-  const urlCode = shortid.generate();
+  const urlCode = shortid.generate().slice(0, 7);
 
   // if url is valid
   if (validUrl.isUri(long)) {
@@ -32,6 +43,7 @@ shortUrlRoute.post('/shortUrl', async (req, res) => {
           long,
           short,
           urlCode,
+          counter: 0,
         });
         // save newUrl and send back json object
         await newUrl.save();
