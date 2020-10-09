@@ -12,7 +12,7 @@ var shortUrlRoute = express.Router();
 // Assumptions:
 // - length of unique code = 7 and use base62 output, we can generate 3.5 trillion possible combinations of unique code.
 // - using npm package shortid, it can generate non-sequential ids.
-// - for scalability of the app, I use mongodb for faster write and read of data.
+// - I use mongodb for faster write and read of data.
 // - to avoid collision with the sever, ideally we would use a distributed systems manager (e.g. ZooKeeper)
 // - but for this solution I am only using a click counter and limiting the user's click to the short url
 // - to avoid failure, we should run multiple instances of ZooKeeper
