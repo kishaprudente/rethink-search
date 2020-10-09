@@ -1,11 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const faker = require('faker');
-const User = require('./models/User');
+const Url = require('./models/Url');
+const config = require('config');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = 3001;
+
+const userRoute = require('./routes/userRoute');
+const shortUrlRoute = require('./routes/shortUrlRoute');
+const { countDocuments } = require('./models/Url');
 
 app
   .use(express.urlencoded({ extended: false }))
@@ -17,41 +21,16 @@ mongoose.connect('mongodb://localhost/rethinkCodeChallenge', {
   useUnifiedTopology: true,
 });
 
-const paginate = (model) => {
-  return async (req, res, next) => {
-    const page = parseInt(req.query.page);
-    const limit = parseInt(req.query.limit);
-    const startIndex = (page - 1) * limit;
-    const endIndex = page * limit;
-    const results = {};
-    if (endIndex < User.length) {
-      results.next = {
-        page: page + 1,
-        limit: limit,
-      };
-    }
-    if (startIndex > 0) {
-      results.previous = {
-        page: page - 1,
-        limit: limit,
-      };
-    }
-    try {
-      results.results = await model.find().limit(limit).skip(startIndex).exec();
-      res.json(results);
-      next();
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  };
-};
+app.use('/api', userRoute);
+app.use('/api', shortUrlRoute);
 
-app.get('/api/users', paginate(User), (req, res) => {
-  res.json(res.paginatedResults);
-});
-
-app.get('/api/users/:user', paginate(User), (req, res) => {
-  res.json(res.paginatedResults);
+app.get(`/:urlCode`, async (req, res) => {
+  const code = req.params;
+  console.log('code', code);
+  const urlCode = await Url.findOne({ urlCode: req.params.code });
+  if (urlCode == null) return res.sendStatus(404);
+  urlCode.save();
+  res.redirect(urlCode.long);
 });
 
 app.listen(PORT, () => {
