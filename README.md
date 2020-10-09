@@ -5,6 +5,7 @@
 - `npm i`
 - `npm seed`
 - `npm start`
+- go to `localhost:3000`
 
 ### Q # 2
 
