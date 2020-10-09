@@ -59,7 +59,7 @@ export default function ShortURL() {
       setUrls(allUrl.data.shortUrls);
     };
     fetchUrls();
-  }, []);
+  }, [urls]);
 
   return (
     <Grid container justify='center'>

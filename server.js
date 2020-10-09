@@ -25,12 +25,11 @@ app.use('/api', userRoute);
 app.use('/api', shortUrlRoute);
 
 app.get(`/:urlCode`, async (req, res) => {
-  const code = req.params;
-  console.log('code', code);
-  const urlCode = await Url.findOne({ urlCode: req.params.code });
-  if (urlCode == null) return res.sendStatus(404);
-  urlCode.save();
-  res.redirect(urlCode.long);
+  const { urlCode } = req.params;
+  const code = await Url.findOne({ urlCode: urlCode });
+  if (code == null) return res.sendStatus(404);
+  code.save();
+  res.redirect(code.long);
 });
 
 app.listen(PORT, () => {
