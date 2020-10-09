@@ -7,7 +7,9 @@ const Url = require('../models/Url');
 var shortUrlRoute = express.Router();
 
 // Q # 3
-// #### Assumptions:
+// Given any URL, shorten it and return a globally unique URL back to the user.
+// Make sure to call out any assumptions and / or limitations in your solution.
+// Assumptions:
 // - length of unique code = 7 and use base62 output, we can generate 3.5 trillion possible combinations of unique code.
 // - using npm package shortid, it can generate non-sequential ids.
 // - for scalability of the app, I use mongodb for faster write and read of data.

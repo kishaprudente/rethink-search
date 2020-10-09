@@ -7,6 +7,12 @@ const User = require('../models/User');
 // Update search results with each character entered by the user.
 // Make sure to call out any assumptions and / or limitations in your solution.
 
+// Assumptions:
+// - over a million data coming in from api
+// - paginate the data with mongodb pagination and return only data with page and limit requested from the query.
+// - given the data is loaded in the table, user can search table with each character input in the search.
+// - to make sure characters match data with input from the search, make data lower case.
+
 const paginate = (model) => {
   return async (req, res, next) => {
     const page = parseInt(req.query.page);
